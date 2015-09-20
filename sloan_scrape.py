@@ -7,18 +7,18 @@ from bs4 import BeautifulSoup
 # manual list to ignore special releases, live albums etc (no repeat lyrics)
 albums = [
 	'peppermint',
-	'smeared',
-	'twice-removed',
-	'one-chord-to-another',
-	'navy-blues',
-	'between-the-bridges',
-	'pretty-together',
-	'action-pact',
-	'a-sides-win-singles-1992-2005',
-	'never-hear-the-end-of-it',
-	'parallel-play',
-	'hit-run',
-	'the-double-cross'
+	# 'smeared',
+	# 'twice-removed',
+	# 'one-chord-to-another',
+	# 'navy-blues',
+	# 'between-the-bridges',
+	# 'pretty-together',
+	# 'action-pact',
+	# 'a-sides-win-singles-1992-2005',
+	# 'never-hear-the-end-of-it',
+	# 'parallel-play',
+	# 'hit-run',
+	# 'the-double-cross'
 	# 'commonwealth'
 ]
 
@@ -63,7 +63,7 @@ for song in song_urls:
 		paragraph = paragraph.contents
 		for p in paragraph:
 			if p.find('<br') == -1:
-				p = strip_for_text(p)
+				p = strip_for_text(p).capitalize()
 				data.append(p)
 
 json.dump(data, open("data/sloan.json", 'w'), indent=1)
