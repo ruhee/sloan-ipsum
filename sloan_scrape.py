@@ -7,18 +7,18 @@ from bs4 import BeautifulSoup
 # manual list to ignore special releases, live albums etc (no repeat lyrics)
 albums = [
 	'peppermint',
-	# 'smeared',
-	# 'twice-removed',
-	# 'one-chord-to-another',
-	# 'navy-blues',
-	# 'between-the-bridges',
-	# 'pretty-together',
-	# 'action-pact',
-	# 'a-sides-win-singles-1992-2005',
-	# 'never-hear-the-end-of-it',
-	# 'parallel-play',
-	# 'hit-run',
-	# 'the-double-cross'
+	'smeared',
+	'twice-removed',
+	'one-chord-to-another',
+	'navy-blues',
+	'between-the-bridges',
+	'pretty-together',
+	'action-pact',
+	'a-sides-win-singles-1992-2005',
+	'never-hear-the-end-of-it',
+	'parallel-play',
+	'hit-run',
+	'the-double-cross'
 	# 'commonwealth'
 ]
 
