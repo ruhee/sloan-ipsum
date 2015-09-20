@@ -30,10 +30,12 @@ def strip_for_urls(s):
 	return s.replace(' ','-').replace(u'\u2019',"").replace(u'\u2032',"").replace('?','').replace('(','').replace(')','').replace(',','')
 
 def strip_for_text(s):
-	return s.lstrip().replace(u'\u2019',"'").replace(u'\u201c','"').replace(u'\u201d','"').replace(u'\u2032',"'").replace(u'\u2018',"'").replace(u'\u2013','-')
+	return s.lstrip().replace(u'\u2019',"'").replace(u'\u201c','"').replace(u'\u201d','"').replace(u'\u2032',"'").replace(u'\u2018',"'").replace(u'\u2013','-').replace(u'\u2014','-').replace(u'\u2026','').replace(u'\u62ae',"'r")
 
 # first get a list of all the songs in each album
 for a in albums:
+	print 'Reading',a,'...'
+
 	req = urllib2.Request(url+a, headers={'User-Agent' : 'friendly scraper, thank you!'})
 	soup = BeautifulSoup(urllib2.urlopen(req).read())
 
@@ -42,7 +44,9 @@ for a in albums:
 		for song in songs:
 			song = "".join(song).lower()
 			song = strip_for_urls(song)
-			if a == 'a-sides-win-singles-1992-2005' and (song != 'try-to-make-it' and song != 'all-used-up'):
+			if a == 'peppermint' and (song != 'torn' and song != 'lucky-for-me' and song != 'pretty-voice'):
+				pass
+			elif a == 'a-sides-win-singles-1992-2005' and (song != 'try-to-make-it' and song != 'all-used-up'):
 				pass
 			elif song == 'take-the-bench':
 				song_urls.append('the-the-bench') # sooooomebody made a typo on the sloan website
@@ -51,6 +55,7 @@ for a in albums:
 
 # then loop through all the songs and grab the lyrics!
 for song in song_urls:
+	print 'Scraping',song,'...'
 	req = urllib2.Request('http://www.sloanmusic.com/song/'+song, headers={ 'User-Agent': 'friendly scraper, thank you!'})
 	soup = BeautifulSoup(urllib2.urlopen(req).read())
 
