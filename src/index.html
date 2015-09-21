@@ -6,7 +6,7 @@
 <body>
 	<h2>sean said ipsum</h2>
 	<p><input type="button" value="Want some text?" onclick="generateIpsum()"></p>
-	<p id="ipsum-container">sdf</p>
+	<p id="ipsum-container"></p>
 	<script type="text/javascript" src="../data/sloan.js"></script>
 	<script type="text/javascript">
 		function generateIpsum() {
@@ -14,11 +14,40 @@
 			var ipsumText = '';
 
 			// TODO:
-			// make longer sentences and add spaces or commas between those (de-capitalize)
-			// check for existing punctuation before adding a period at the end
 			// make multi-paragraph selector and generate based on that
+			// maybe only allow a certain number of lines to be strung together with commas
+			// convert checks to regexes, lazybones
 			for(var i = 0; i < paragraphLength; i++) {
-				ipsumText += lyrics[Math.floor(Math.random()*lyrics.length)] + '. ';
+				var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
+
+				// Needs to catch leading apostrophes, parentheticals
+				if(ipsumText.trim().slice(-1) == ',') {
+					if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'") {
+						ipsumLine = uncapitalize(ipsumLine);
+					}
+
+				}
+
+				// randomly decide whether to string into longer sentence
+				// todo: un-uglify
+				if(randBoolean() && i < paragraphLength-1) {
+					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+						ipsumLine += ', ';
+					}
+					else {
+						ipsumLine = ipsumLine.slice(0, -1) + ', ';
+					}
+				}
+				else {
+					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+						ipsumLine += '. ';
+					}
+					else {
+						ipsumLine += ' ';
+					}
+				}
+
+				ipsumText += ipsumLine;
 			}
 
 			var ipsumContainer = document.getElementById('ipsum-container');
@@ -27,6 +56,14 @@
 
 		function generateParagraphLength() {
 			return Math.floor(Math.random() * (9-3) + 3);
+		}
+
+		function randBoolean() {
+			return !!Math.floor(Math.random() * 2);
+		}
+
+		function uncapitalize(str) {
+			return str.substr(0,1).toLowerCase() + str.substr(1);
 		}
 	</script>
 </body>
