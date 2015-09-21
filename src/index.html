@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sean said ipsum</title>
+</head>
+<body>
+	<h2>sean said ipsum</h2>
+	<p><input type="button" value="Want some text?" onclick="generateIpsum()"></p>
+	<p id="ipsum-container">sdf</p>
+	<script type="text/javascript" src="../data/sloan.js"></script>
+	<script type="text/javascript">
+		function generateIpsum() {
+			var paragraphLength = generateParagraphLength();
+			var ipsumText = '';
+
+			for(var i = 0; i < paragraphLength; i++) {
+				ipsumText += lyrics[Math.floor(Math.random()*lyrics.length)] + '. ';
+			}
+
+			var ipsumContainer = document.getElementById('ipsum-container');
+			console.log(ipsumContainer)
+			ipsumContainer.innerText = ipsumText;
+		}
+
+		function generateParagraphLength() {
+			return Math.floor(Math.random() * (9-3) + 3);
+		}
+	</script>
+</body>
+</html>

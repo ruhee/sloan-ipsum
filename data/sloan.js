@@ -1,4 +1,4 @@
-[
+var lyrics = [
   "You have got such a wonderful chance at",
  "Doing something really cool",
  "Instead you could be hangin' around with us",
