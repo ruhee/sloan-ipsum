@@ -13,12 +13,15 @@
 			var paragraphLength = generateParagraphLength();
 			var ipsumText = '';
 
+			// TODO:
+			// make longer sentences and add spaces or commas between those (de-capitalize)
+			// check for existing punctuation before adding a period at the end
+			// make multi-paragraph selector and generate based on that
 			for(var i = 0; i < paragraphLength; i++) {
 				ipsumText += lyrics[Math.floor(Math.random()*lyrics.length)] + '. ';
 			}
 
 			var ipsumContainer = document.getElementById('ipsum-container');
-			console.log(ipsumContainer)
 			ipsumContainer.innerText = ipsumText;
 		}
 
