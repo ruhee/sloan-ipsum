@@ -12,7 +12,6 @@
 		</div>
 	</header>
 	<div class="container">
-		<!-- <p><input type="number"</p> -->
 		<p>Do you love Sloan? Do you need placeholder copy for your website, design, or other such project? Look no further.</p>
 		<p><input type="button" value="I worship all your handsome words" onclick="generateIpsum()"></p>
 		<p id="ipsum-container"></p>
@@ -24,11 +23,17 @@
 			var ipsumText = '';
 			var chainedLines = 0;
 
+			// Known broken stuff:
+			// looping strings split at apostrophe is failing (undefined or repeated strings)
+			// some lines with commas are breaking the line that follows (probably because of spaces)
+
 			// TODO:
 			// make multi-paragraph selector and generate based on that
 			// convert checks to regexes, lazybones
+
 			for(var i = 0; i < paragraphLength; i++) {
 				var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
+				// var ipsumLine = lyrics[239];
 
 				// uncapitalize line if chained together with commas
 				if(ipsumText.trim().slice(-1) == ',') {
@@ -47,9 +52,12 @@
 						else if(ipsumLine.slice(0,1) == "'") {
 							var newLine = ipsumLine.split("'");
 							newLine[1] = uncapitalize(newLine[1]);
+							console.log(newLine)
 							ipsumLine = "'";
-							for(var i = 1; i <= newLine.length; i++) {
+
+							for(var j = 1; j <= newLine.length; j++) {
 								ipsumLine += newLine[i]
+
 							}
 						}
 					}
@@ -86,9 +94,10 @@
 		}
 
 		function generateParagraphLength() {
-			return Math.floor(Math.random() * (12-5) + 5);
+			return Math.floor(Math.random() * 8 + 8);
 		}
 
+		// just randomly return true or false, mostly for punctuation adding
 		function randBoolean() {
 			return !!Math.floor(Math.random() * 2);
 		}
