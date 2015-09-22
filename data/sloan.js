@@ -1,5 +1,5 @@
-var lyrics =
-  "You have got such a wonderful chance at",
+var lyrics = [
+ "You have got such a wonderful chance at",
  "Doing something really cool",
  "Instead you could be hangin' around with us",
  "Well I bet you thought I would say \"fool\"",
@@ -4925,3 +4925,4 @@ var lyrics =
  "Oh I hope you find",
  "Me, when you manage",
  "To make up your mind"
+]
