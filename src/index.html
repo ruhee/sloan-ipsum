@@ -13,10 +13,11 @@
 	</header>
 	<div class="container">
 		<p>Do you love Sloan? Do you need placeholder copy for your website, design, or other such project? Look no further.</p>
-		<p><input type="button" value="I worship all your handsome words" onclick="generateIpsum()"></p>
+		<p class="center">How many paragraphs? <input type="text" id="numparagraphs" maxlength="2" value="1" />
+		<p><input type="button" value="I worship all your handsome words" onclick="getNumber()"></p>
 		<p id="ipsum-container"></p>
 		<footer>
-		<p>Text acting strange? Too much punctuation? Something broken? Please <a href="mailto:me@ruhee.ca">report a bug</a>.<br />
+		<p>Something broken or acting strange? Please <a href="mailto:me@ruhee.ca">report a bug</a>.<br />
 		All lyrics &copy; Ferguson/Murphy/Pentland/Scott, otherwise known as Sloan. You should <a href="http://sloanmusic.com/#releases">buy their albums</a>.</p>
 		<p class="twitter-links"><a href="https://twitter.com/ruhee_" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @ruhee_</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
@@ -27,9 +28,17 @@
 
 	<script type="text/javascript" src="../data/sloan.js"></script>
 	<script type="text/javascript">
-		function generateIpsum() {
-			var paragraphLength = generateParagraphLength();
-			var ipsumText = '';
+		function getNumber() {
+			var numberOfParagraphs = parseInt(document.getElementById('numparagraphs').value);
+			if(!numberOfParagraphs) {
+				numberOfParagraphs = 1;
+			}
+			generateIpsum(numberOfParagraphs);
+		}
+
+		function generateIpsum(numberOfParagraphs) {
+
+			var ipsumText = '<p>';
 			var chainedLines = 0;
 
 			// Known broken stuff:
@@ -37,69 +46,80 @@
 			// some lines with commas are breaking the line that follows (probably because of spaces)
 
 			// TODO:
-			// make multi-paragraph selector and generate based on that
 			// convert checks to regexes, lazybones
+			for(var p = 0; p < numberOfParagraphs; p++) {
+				// we want all the paragraphs to be different lengths
+				var paragraphLength = generateParagraphLength();
 
-			for(var i = 0; i < paragraphLength; i++) {
-				var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
-				// var ipsumLine = lyrics[239];
+				for(var i = 0; i < paragraphLength; i++) {
+					var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
+					// var ipsumLine = lyrics[239];
 
-				// uncapitalize line if chained together with commas
-				if(ipsumText.trim().slice(-1) == ',') {
-					if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'") {
-						ipsumLine = uncapitalize(ipsumLine);
-					}
-
-					// catch leading apostrophes and parentheticals, uncapitalize second char there instead
-					// YES this is redundant and ugly. TODO: fix once strings are all coming back ok
-					if(ipsumLine.slice(0,1) == '(' || ipsumLine.slice(0,1) == "'") {
-						if(ipsumLine.slice(0,1) == '(' && (ipsumLine.slice(1,3) != 'I ' && ipsumLine.slice(1,3) != "I'")) {
-							var newLine = ipsumLine.split('(');
-							newLine[1] = uncapitalize(newLine[1]);
-							ipsumLine = '(' + newLine[1];
+					// uncapitalize line if chained together with commas
+					if(ipsumText.trim().slice(-1) == ',') {
+						if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'") {
+							ipsumLine = uncapitalize(ipsumLine);
 						}
-						else if(ipsumLine.slice(0,1) == "'") {
-							var newLine = ipsumLine.split("'");
-							newLine[1] = uncapitalize(newLine[1]);
-							console.log(newLine)
-							ipsumLine = "'";
 
-							for(var j = 1; j <= newLine.length; j++) {
-								ipsumLine += newLine[i]
+						// catch leading apostrophes and parentheticals, uncapitalize second char there instead
+						// YES this is redundant and ugly. TODO: fix once strings are all coming back ok
+						if(ipsumLine.slice(0,1) == '(' || ipsumLine.slice(0,1) == "'") {
+							if(ipsumLine.slice(0,1) == '(' && (ipsumLine.slice(1,3) != 'I ' && ipsumLine.slice(1,3) != "I'")) {
+								var newLine = ipsumLine.split('(');
+								newLine[1] = uncapitalize(newLine[1]);
+								ipsumLine = '(' + newLine[1];
+							}
+							else if(ipsumLine.slice(0,1) == "'") {
+								var newLine = ipsumLine.split("'");
+								newLine[1] = uncapitalize(newLine[1]);
+								console.log(newLine)
+								ipsumLine = "'";
 
+								for(var j = 1; j <= newLine.length; j++) {
+									ipsumLine += newLine[i]
+
+								}
 							}
 						}
+
 					}
 
-				}
 
-
-				// randomly decide whether to string into longer sentence
-				// todo: un-uglify
-				if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
-					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
-						ipsumLine += ', ';
+					// randomly decide whether to string into longer sentence
+					// todo: un-uglify
+					if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
+						if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+							ipsumLine += ', ';
+						}
+						else {
+							ipsumLine = ipsumLine.slice(0, -1) + ', ';
+						}
+						chainedLines++;
 					}
 					else {
-						ipsumLine = ipsumLine.slice(0, -1) + ', ';
+						if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+							ipsumLine += '. ';
+						}
+						else {
+							ipsumLine += ' ';
+						}
+						chainedLines = 0;
 					}
-					chainedLines++;
+
+					ipsumText += ipsumLine;
+				}
+				if(p < numberOfParagraphs) {
+					ipsumText += '</p><p>';
 				}
 				else {
-					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
-						ipsumLine += '. ';
-					}
-					else {
-						ipsumLine += ' ';
-					}
-					chainedLines = 0;
+					ipsumText += '</p>';
 				}
 
-				ipsumText += ipsumLine;
 			}
 
+
 			var ipsumContainer = document.getElementById('ipsum-container');
-			ipsumContainer.innerText = ipsumText;
+			ipsumContainer.innerHTML = ipsumText;
 		}
 
 		function generateParagraphLength() {
