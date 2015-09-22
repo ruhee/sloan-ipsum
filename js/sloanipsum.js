@@ -17,17 +17,20 @@ function generateIpsum(numberOfParagraphs) {
 
 	// TODO:
 	// convert checks to regexes, lazybones
+	// Clean up uncapitalize for special cases (make array or something)
+	// Handle special uncapitalize cases for 'S E A N', 'P L A Y', 'Jolene'
+	// Check data for more split quotations
+
 	for(var p = 0; p < numberOfParagraphs; p++) {
 		// we want all the paragraphs to be different lengths
 		var paragraphLength = generateParagraphLength();
 
 		for(var i = 0; i < paragraphLength; i++) {
 			var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
-			// var ipsumLine = lyrics[239];
 
 			// uncapitalize line if chained together with commas
 			if(ipsumText.trim().slice(-1) == ',') {
-				if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'") {
+				if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'" && ipsumLine.slice(0,6) != 'Johnny' && ipsumLine.slice(0,4) != 'Sean' && ipsumLine.slice(0,3) != 'Ana') {
 					ipsumLine = uncapitalize(ipsumLine);
 				}
 
@@ -51,30 +54,31 @@ function generateIpsum(numberOfParagraphs) {
 						}
 					}
 				}
-
 			}
 
-
 			// randomly decide whether to string into longer sentence
-			// todo: un-uglify
+			// I hate regex
+			var lastChar = ipsumLine.slice(-1);
+			var lastCharPunctuation = (lastChar != '.' && lastChar != '?' && lastChar != ',' && lastChar != '!');
+
 			if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
-				if(ipsumLine.trim().slice(-1) != '.' && ipsumLine.trim().slice(-1) != '?' && ipsumLine.trim().slice(-1) != ','){
-					console.log('fulfilled if statements, comma added to (before):',ipsumLine)
+				if(lastCharPunctuation){
+					// console.log('fulfilled if statements, comma added to (before):',ipsumLine)
 					ipsumLine += ', ';
 				}
 				else {
-					console.log('no if conditions, comma added to (before):',ipsumLine)
+					// console.log('no if conditions, comma added to (before):',ipsumLine)
 					ipsumLine = ipsumLine.slice(0, -1) + ', ';
 				}
 				chainedLines++;
 			}
 			else {
-				if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?' && ipsumLine.slice(-1) != ','){
-					console.log('if conditions, period added to:',ipsumLine);
+				if(lastCharPunctuation){
+					// console.log('if conditions, period added to:',ipsumLine);
 					ipsumLine += '. ';
 				}
 				else {
-					console.log('fires if there is a period or question mark... that happened!')
+					// console.log('fires if there is a period or question mark... that happened!')
 					ipsumLine += ' ';
 				}
 				chainedLines = 0;
@@ -89,8 +93,7 @@ function generateIpsum(numberOfParagraphs) {
 			ipsumText += '</p>';
 		}
 
-	}
-
+	}// end for (numberOfParagraphs)
 
 	var ipsumContainer = document.getElementById('ipsum-container');
 	ipsumContainer.innerHTML = ipsumText;
