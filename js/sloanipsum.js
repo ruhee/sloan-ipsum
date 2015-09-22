@@ -59,18 +59,22 @@ function generateIpsum(numberOfParagraphs) {
 			// todo: un-uglify
 			if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
 				if(ipsumLine.trim().slice(-1) != '.' && ipsumLine.trim().slice(-1) != '?' && ipsumLine.trim().slice(-1) != ','){
+					console.log('fulfilled if statements, comma added to (before):',ipsumLine)
 					ipsumLine += ', ';
 				}
 				else {
+					console.log('no if conditions, comma added to (before):',ipsumLine)
 					ipsumLine = ipsumLine.slice(0, -1) + ', ';
 				}
 				chainedLines++;
 			}
 			else {
-				if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+				if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?' && ipsumLine.slice(-1) != ','){
+					console.log('if conditions, period added to:',ipsumLine);
 					ipsumLine += '. ';
 				}
 				else {
+					console.log('fires if there is a period or question mark... that happened!')
 					ipsumLine += ' ';
 				}
 				chainedLines = 0;

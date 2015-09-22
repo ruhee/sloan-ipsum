@@ -102,7 +102,7 @@ var lyrics = [
  "She said, \"You is funny\"",
  "I said, \"You are funny\"",
  "She said, \"Thank you\"",
- "and I said, \"Nevermind\"",
+ "And I said, \"Nevermind\"",
  "She rolled her eyes",
  "Her beautiful eyes",
  "The point is not the grammar",
