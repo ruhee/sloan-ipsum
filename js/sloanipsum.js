@@ -58,7 +58,7 @@ function generateIpsum(numberOfParagraphs) {
 			// randomly decide whether to string into longer sentence
 			// todo: un-uglify
 			if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
-				if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
+				if(ipsumLine.trim().slice(-1) != '.' && ipsumLine.trim().slice(-1) != '?' && ipsumLine.trim().slice(-1) != ','){
 					ipsumLine += ', ';
 				}
 				else {
