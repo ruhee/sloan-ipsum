@@ -2,12 +2,20 @@
 <html>
 <head>
 	<title>sean said ipsum</title>
+	<link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+	<header class="header">
+		<div class="header-container">
+			<!-- <img class="sloan" src="../img/octa.jpg" /> -->
+			<h2>sean said ipsum</h2>
+		</div>
+	</header>
 	<div class="container">
-	<h2>sean said ipsum</h2>
-	<p><input type="button" value="Want some text?" onclick="generateIpsum()"></p>
-	<p id="ipsum-container"></p>
+		<!-- <p><input type="number"</p> -->
+		<p>Do you love Sloan? Do you need placeholder copy for your website, design, or other such project? Look no further.</p>
+		<p><input type="button" value="I worship all your handsome words" onclick="generateIpsum()"></p>
+		<p id="ipsum-container"></p>
 	</div>
 	<script type="text/javascript" src="../data/sloan.js"></script>
 	<script type="text/javascript">
@@ -35,7 +43,7 @@
 							var newLine = ipsumLine.split('(');
 							newLine[1] = uncapitalize(newLine[1]);
 							ipsumLine = '(' + newLine[1];
-				}
+						}
 						else if(ipsumLine.slice(0,1) == "'") {
 							var newLine = ipsumLine.split("'");
 							newLine[1] = uncapitalize(newLine[1]);
