@@ -4,39 +4,61 @@
 	<title>sean said ipsum</title>
 </head>
 <body>
+	<div class="container">
 	<h2>sean said ipsum</h2>
 	<p><input type="button" value="Want some text?" onclick="generateIpsum()"></p>
 	<p id="ipsum-container"></p>
+	</div>
 	<script type="text/javascript" src="../data/sloan.js"></script>
 	<script type="text/javascript">
 		function generateIpsum() {
 			var paragraphLength = generateParagraphLength();
 			var ipsumText = '';
+			var chainedLines = 0;
 
 			// TODO:
 			// make multi-paragraph selector and generate based on that
-			// maybe only allow a certain number of lines to be strung together with commas
 			// convert checks to regexes, lazybones
 			for(var i = 0; i < paragraphLength; i++) {
 				var ipsumLine = lyrics[Math.floor(Math.random()*lyrics.length)];
 
-				// Needs to catch leading apostrophes, parentheticals
+				// uncapitalize line if chained together with commas
 				if(ipsumText.trim().slice(-1) == ',') {
 					if(ipsumLine.slice(0,2) != 'I ' && ipsumLine.slice(0,2) != "I'") {
 						ipsumLine = uncapitalize(ipsumLine);
 					}
 
+					// catch leading apostrophes and parentheticals, uncapitalize second char there instead
+					// YES this is redundant and ugly. TODO: fix once strings are all coming back ok
+					if(ipsumLine.slice(0,1) == '(' || ipsumLine.slice(0,1) == "'") {
+						if(ipsumLine.slice(0,1) == '(' && (ipsumLine.slice(1,3) != 'I ' && ipsumLine.slice(1,3) != "I'")) {
+							var newLine = ipsumLine.split('(');
+							newLine[1] = uncapitalize(newLine[1]);
+							ipsumLine = '(' + newLine[1];
 				}
+						else if(ipsumLine.slice(0,1) == "'") {
+							var newLine = ipsumLine.split("'");
+							newLine[1] = uncapitalize(newLine[1]);
+							ipsumLine = "'";
+							for(var i = 1; i <= newLine.length; i++) {
+								ipsumLine += newLine[i]
+							}
+						}
+					}
+
+				}
+
 
 				// randomly decide whether to string into longer sentence
 				// todo: un-uglify
-				if(randBoolean() && i < paragraphLength-1) {
+				if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
 					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
 						ipsumLine += ', ';
 					}
 					else {
 						ipsumLine = ipsumLine.slice(0, -1) + ', ';
 					}
+					chainedLines++;
 				}
 				else {
 					if(ipsumLine.slice(-1) != '.' && ipsumLine.slice(-1) != '?'){
@@ -45,6 +67,7 @@
 					else {
 						ipsumLine += ' ';
 					}
+					chainedLines = 0;
 				}
 
 				ipsumText += ipsumLine;
@@ -55,7 +78,7 @@
 		}
 
 		function generateParagraphLength() {
-			return Math.floor(Math.random() * (9-3) + 3);
+			return Math.floor(Math.random() * (12-5) + 5);
 		}
 
 		function randBoolean() {
