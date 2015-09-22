@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>sean said ipsum</title>
-	<link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
-	<header class="header">
-		<div class="header-container">
-			<!-- <img class="sloan" src="../img/octa.jpg" /> -->
-			<h2>sean said ipsum</h2>
-		</div>
-	</header>
-	<div class="container">
-		<p>Do you love Sloan? Do you need placeholder copy for your website, design, or other such project? Look no further.</p>
-		<p class="center">How many paragraphs? <input type="text" id="numparagraphs" maxlength="2" value="1" />
-		<p><input type="button" value="I worship all your handsome words" onclick="getNumber()"></p>
-		<p id="ipsum-container"></p>
-		<footer>
-		<p>Something broken or acting strange? Please <a href="mailto:me@ruhee.ca">report a bug</a>.<br />
-		All lyrics &copy; Ferguson/Murphy/Pentland/Scott, otherwise known as Sloan. You should <a href="http://sloanmusic.com/#releases">buy their albums</a>.</p>
-		<p class="twitter-links"><a href="https://twitter.com/ruhee_" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @ruhee_</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-          </script>
-          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://ruhee.ca/sloan-ipsum" data-via="ruhee_" data-dnt="true">Tweet</a></p>
-	</footer>
-	</div>
-
-	<script type="text/javascript" src="../data/sloan.js"></script>
-	<script type="text/javascript">
-		function getNumber() {
+function getNumber() {
 			var numberOfParagraphs = parseInt(document.getElementById('numparagraphs').value);
 			if(!numberOfParagraphs) {
 				numberOfParagraphs = 1;
@@ -134,6 +104,3 @@
 		function uncapitalize(str) {
 			return str.substr(0,1).toLowerCase() + str.substr(1);
 		}
-	</script>
-</body>
-</html>

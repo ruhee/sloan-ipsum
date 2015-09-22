@@ -47,6 +47,10 @@ h2 {
 	padding: 0;
 }
 
+h2 span {
+	font-size: 0.5em;
+}
+
 .container {
 	max-width: 600px;
 	margin: 0 auto;
@@ -70,6 +74,10 @@ input[type=text] {
 	padding: 0.25em;
 	width: 2em;
 	text-align: center;
+}
+
+#ipsum-container {
+	margin: 2em 0;
 }
 
 p.center {
