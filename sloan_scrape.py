@@ -1,4 +1,9 @@
 #!/usr/bin/python
+
+# NOTE: This doesn't match the data in data/sloan.js anymore. It will dump a json file for you, but
+# the data used in the ipsum generator has been tidied further for capitalization, apostrophes,
+# removal of some brackets, chaining of lines to remove orphans, and so on.
+
 import json
 import urllib2
 import requests
