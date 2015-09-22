@@ -1344,7 +1344,7 @@ var lyrics = [
  "Well, that's all right",
  "Kurt's still cool, and Angus rules",
  "And that's all right, all right",
- "ou take control of having what you want around you",
+ "You take control of having what you want around you",
  "And every blink of your eye can make an old man seem younger",
  "Than every single day in his life",
  "Before you carried 'round his weight like it was yours to show the world",
