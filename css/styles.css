@@ -2,12 +2,21 @@ html, body{
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	font-family: Helvetica, Arial, sans-serif;
 	background: #fff;
 	font-size: 16px;
-	/*margin: 30px;*/
 	line-height: 1.4em;
+}
+
+a{
+	color: #00a3e6;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 header {
@@ -29,12 +38,14 @@ img.sloan {
 	display: block;
 	float: left;
 }
+
 h2 {
 	font-weight: normal;
 	color: #fff;
 	margin: 0;
 	padding: 0;
 }
+
 .container {
 	max-width: 600px;
 	margin: 0 auto;
@@ -49,4 +60,13 @@ input[type=button] {
 	display: block;
 	margin: 0 auto;
 	background: #fff;
+}
+
+p.twitter-links {
+	text-align: center;
+}
+
+footer {
+	color: #797979;
+	font-size: 0.75em;
 }
