@@ -4,10 +4,15 @@ html, body{
 	font-size: 16px;
 }
 
+html {
+	/*font-size: 62.5%;*/
+}
+
 body {
 	font-family: Helvetica, Arial, sans-serif;
 	background: #fff;
 	line-height: 1.4em;
+	font-size: 100%;
 }
 
 a{
