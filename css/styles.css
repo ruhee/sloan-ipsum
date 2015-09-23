@@ -7,12 +7,11 @@ html, body{
 body {
 	font-family: Helvetica, Arial, sans-serif;
 	background: #fff;
-	/*font-size: 16px;*/
 	line-height: 1.4em;
 }
 
 a{
-	color: #00a3e6;
+	color: #00a3e6; /* Yes, this is the blue from the OCTA cover, in case you were wondering. */
 	text-decoration: none;
 }
 

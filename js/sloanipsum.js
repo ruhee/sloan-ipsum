@@ -11,8 +11,8 @@ function generateIpsum(numberOfParagraphs) {
 	var ipsumText = '<p>';
 	var chainedLines = 0;
 
-	// Known broken stuff:
-	// looping strings split at apostrophe is failing (undefined or repeated strings)
+	// TODO: Force it not to end a 'sentence' if the phrase ends with 'and'?
+	// MAYBE TODO: Enable album selection/exclusion??? (This seems crazy.)
 
 	for(var p = 0; p < numberOfParagraphs; p++) {
 		// we want all the paragraphs to be different lengths
@@ -39,14 +39,8 @@ function generateIpsum(numberOfParagraphs) {
 
 				// catch leading apostrophes, uncapitalize second char there instead
 				if(ipsumLine.slice(0,1) == "'") {
-					var newLine = ipsumLine.split("'");
-					newLine[1] = uncapitalize(newLine[1]);
-					console.log(newLine)
-					ipsumLine = "'";
-
-					for(var j = 1; j <= newLine.length; j++) {
-						ipsumLine += newLine[i]
-					}
+					ipsumLine = uncapitalize(ipsumLine.slice(1));
+					ipsumLine = "'" + ipsumLine;
 				}
 			}
 
@@ -55,24 +49,23 @@ function generateIpsum(numberOfParagraphs) {
 			var lastChar = ipsumLine.slice(-1);
 			var lastCharNotPunctuation = (lastChar != '.' && lastChar != '?' && lastChar != ',' && lastChar != '!');
 
+			// random function returns true + not the last line + not a million chained phrases
 			if(randBoolean() && i < paragraphLength-1 && chainedLines < 4) {
 				if(lastCharNotPunctuation){
-					// console.log('fulfilled if statements, comma added to (before):',ipsumLine)
 					ipsumLine += ', ';
 				}
 				else {
-					// console.log('no if conditions, comma added to (before):',ipsumLine)
+					// last char IS punctuation, so slice it off and add a comma instead
 					ipsumLine = ipsumLine.slice(0, -1) + ', ';
 				}
 				chainedLines++;
 			}
 			else {
 				if(lastCharNotPunctuation){
-					// console.log('if conditions, period added to:',ipsumLine);
 					ipsumLine += '. ';
 				}
 				else {
-					// console.log('fires if there is a period or question mark... that happened!')
+					// last char IS punctuation, just leave it there since we're starting a new 'sentence'
 					ipsumLine += ' ';
 				}
 				chainedLines = 0;
@@ -80,6 +73,8 @@ function generateIpsum(numberOfParagraphs) {
 
 			ipsumText += ipsumLine;
 		}
+
+		// if this isn't the last paragraph, make a new one
 		if(p < numberOfParagraphs) {
 			ipsumText += '</p><p>';
 		}
@@ -87,7 +82,6 @@ function generateIpsum(numberOfParagraphs) {
 			// check for punctuation here too, slice and add a period if a comma
 			ipsumText += '</p>';
 		}
-
 	}// end for (numberOfParagraphs)
 
 	var ipsumContainer = document.getElementById('ipsum-container');
