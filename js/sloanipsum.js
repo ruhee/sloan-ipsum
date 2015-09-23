@@ -29,6 +29,7 @@ function generateIpsum(numberOfParagraphs) {
 					ipsumLine.slice(0,4) != 'Sean' &&
 					ipsumLine.slice(0,3) != 'Ana' &&
 					ipsumLine.slice(0,6) != 'Jolene' &&
+					ipsumLine.slice(0,7) != 'Chester' &&
 					ipsumLine.slice(0,2) != 'S ' &&
 					ipsumLine.slice(0,2) != 'P ' &&
 					ipsumLine.slice(0,2) != 'G ' &&
