@@ -1,5 +1,6 @@
 function getNumber() {
-	var numberOfParagraphs = parseInt(document.getElementById('numparagraphs').value);
+	var paragraphSelect = document.getElementById('paragraphselect');
+	var numberOfParagraphs = parseInt(paragraphSelect.options[paragraphSelect.selectedIndex].value);
 	if(!numberOfParagraphs) {
 		numberOfParagraphs = 1;
 	}
