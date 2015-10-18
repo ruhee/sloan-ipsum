@@ -137,7 +137,7 @@ var lyrics = [
  "All I really want to know is what she thinks of me",
  "I think my love for her makes me miss the point",
  "I miss the point, I miss the point",
- "I miss the point, Hey mister",
+ "I miss the point, hey mister",
  "Through the music there's a dancing girl",
  "She can be broken in your hands",
  "She knows you're looking at her but that's what scares her",
