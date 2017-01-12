@@ -42,7 +42,7 @@ for a in albums:
 	print 'Reading',a,'...'
 
 	req = urllib2.Request(url+a, headers={'User-Agent' : 'friendly scraper, thank you!'})
-	soup = BeautifulSoup(urllib2.urlopen(req).read())
+	soup = BeautifulSoup(urllib2.urlopen(req).read(), 'html.parser')
 
 	for song_list in soup.find('ol').find_all('a'):
 		songs = song_list.strings
@@ -62,7 +62,7 @@ for a in albums:
 for song in song_urls:
 	print 'Scraping',song,'...'
 	req = urllib2.Request('http://www.sloanmusic.com/song/'+song, headers={ 'User-Agent': 'friendly scraper, thank you!'})
-	soup = BeautifulSoup(urllib2.urlopen(req).read())
+	soup = BeautifulSoup(urllib2.urlopen(req).read(), 'html.parser')
 
 	for paragraph in soup.find('div', attrs={'class': 'entry-content'}).find_all('p'):
 		paragraph = paragraph.contents
