@@ -32,10 +32,27 @@ url = 'http://www.sloanmusic.com/release/'
 song_urls = []
 
 def strip_for_urls(s):
-	return s.replace(' ','-').replace(u'\u2019',"").replace(u'\u2032',"").replace('?','').replace('(','').replace(')','').replace(',','')
+	return s
+		.replace(' ','-')
+		.replace(u'\u2019',"")
+		.replace(u'\u2032',"")
+		.replace('?','')
+		.replace('(','')
+		.replace(')','')
+		.replace(',','')
 
 def strip_for_text(s):
-	return s.lstrip().replace(u'\u2019',"'").replace(u'\u201c','"').replace(u'\u201d','"').replace(u'\u2032',"'").replace(u'\u2018',"'").replace(u'\u2013','-').replace(u'\u2014','-').replace(u'\u2026','').replace(u'\u62ae',"'r")
+	return s
+		.lstrip()
+		.replace(u'\u2019',"'")
+		.replace(u'\u201c','"')
+		.replace(u'\u201d','"')
+		.replace(u'\u2032',"'")
+		.replace(u'\u2018',"'")
+		.replace(u'\u2013','-')
+		.replace(u'\u2014','-')
+		.replace(u'\u2026','')
+		.replace(u'\u62ae',"'r")
 
 # first get a list of all the songs in each album
 for a in albums:
@@ -68,7 +85,7 @@ for song in song_urls:
 		paragraph = paragraph.contents
 		for p in paragraph:
 			if p.find('<br') == -1:
-				p = strip_for_text(p).capitalize()
+				p = strip_for_text(p).capitalize() # TODO: replace with non-destructive capitalization
 				data.append(p)
 
 json.dump(data, open("data/sloan.json", 'w'), indent=1)
