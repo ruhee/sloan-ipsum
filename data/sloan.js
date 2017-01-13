@@ -90,7 +90,7 @@ var lyrics = [
  "I&rsquo;m feelin&rsquo; that I&rsquo;ve been torn",
  "What can I do?",
  "I say what you want me to say",
- "But now i&rsquo;ve got to say what&rsquo;s true",
+ "But now I&rsquo;ve got to say what&rsquo;s true",
  "You give me a word in edge-wise",
  "But sometimes I need more",
  "She was underwhelmed, if that&rsquo;s a word",
