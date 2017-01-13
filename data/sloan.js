@@ -1987,7 +1987,7 @@ var lyrics = [
  "It&rsquo;s a hard life living a lie",
  "If it feels good do it even if you shouldn&rsquo;t",
  "Dont let people mess you around",
- "Feels good do it even if you shouldnt",
+ "Feels good do it even if you shouldn&rsquo;t",
  "Nobody can mess you around",
  "You&rsquo;re running away",
  "Things would have been different",
